@@ -21,3 +21,5 @@ Clojure wrapper for the [Awaitility](http://www.awaitility.org/) Java library.
 Copyright © 2024 Jordan Robinson
 
 Distributed under the MIT license.
+
+Originally forked from the MyPulse [awaitility-clj](https://github.com/mypulse-uk/awaitility-clj) library, also MIT licensed.
