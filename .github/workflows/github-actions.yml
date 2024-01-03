@@ -1,0 +1,23 @@
+name: CI and push to Clojars
+run-name: Running linting and tests, then pushing to clojars 🚀
+on: [push]
+jobs:
+  build-test-and-publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
+
+      - name: build
+        run: ${{ github.workspace }}/go library:check
+
+      - name: test
+        run: ${{ github.workspace }}/go library:test:unit
+
+      - name: publish
+        env:
+          VERSION: 0.0.${{ github.run_number }}
+          CLOJARS_DEPLOY_USERNAME: ${{ secrets.CLOJARS_USER }}
+          CLOJARS_DEPLOY_TOKEN: ${{ secrets.CLOJARS_TOKEN }}
+        run: ${{ github.workspace }}/go library:publish:release
