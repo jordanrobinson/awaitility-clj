@@ -1,13 +1,14 @@
 (ns awaitility-clj.core
   (:import
-    (java.time
-      Duration)
-    (java.time.temporal
-      ChronoUnit)
-    (org.awaitility
-      Awaitility)
-    (org.awaitility.core
-      ConditionFactory)))
+   (java.time
+     Duration)
+   (java.time.temporal
+     ChronoUnit)
+   (org.awaitility
+     Awaitility)
+   (org.awaitility.core
+     ConditionFactory)
+   [org.awaitility.pollinterval PollInterval]))
 
 (defn- keyword->chrono-unit
   [keyword-unit]
@@ -24,7 +25,9 @@
   (case option-key
     :at-most (.atMost factory ^Duration (tuple->duration option-data))
     :at-least (.atLeast factory ^Duration (tuple->duration option-data))
-    :poll-interval (.pollInterval factory ^Duration (tuple->duration option-data))))
+    :poll-interval (if (vector? option-data)
+                     (.pollInterval factory ^Duration (tuple->duration option-data))
+                     (.pollInterval factory ^PollInterval option-data))))
 
 (defn- apply-options
   [^ConditionFactory factory options]

@@ -3,8 +3,9 @@
     [awaitility-clj.core :refer [wait-for]]
     [clojure.test :refer [deftest is testing]])
   (:import
-    (org.awaitility.core
-      ConditionTimeoutException)))
+   (org.awaitility.core
+     ConditionTimeoutException)
+   [org.awaitility.pollinterval FibonacciPollInterval]))
 
 (deftest wait-for-waits-until-condition-is-true
   (testing "wait-for waits until condition is true"
@@ -46,6 +47,7 @@
                   (swap! calls inc)
                   (>= (System/currentTimeMillis) end-time)))
       (is (= 3 @calls))))
+
   (testing "wait-for uses poll interval if set"
     (let [start-time (System/currentTimeMillis)
           end-time (+ start-time 190)
@@ -55,4 +57,15 @@
                 (fn []
                   (swap! calls inc)
                   (>= (System/currentTimeMillis) end-time)))
-      (is (= 4 @calls)))))
+      (is (= 4 @calls))))
+
+  (testing "wait-for supports directly using Java poll intervals"
+    (let [start-time (System/currentTimeMillis)
+          end-time (+ start-time 50)
+          calls (atom 0)]
+      (wait-for {:at-most [500 :milliseconds]
+                 :poll-interval (FibonacciPollInterval.)}
+        (fn []
+          (swap! calls inc)
+          (>= (System/currentTimeMillis) end-time)))
+      (is (= 9 @calls)))))
