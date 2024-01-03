@@ -18,10 +18,22 @@
   (testing "wait-for throws ConditionTimeoutException if condition times out"
     (let [start-time (System/currentTimeMillis)
           end-time (+ start-time 1500)]
-      (is (thrown?
+      (is (thrown-with-msg?
             ConditionTimeoutException
+            #"was not fulfilled within"
             (wait-for
               {:at-most [200 :milliseconds]}
+              (fn [] (>= (System/currentTimeMillis) end-time))))))))
+
+(deftest wait-for-throws-exception-if-finished-before-at-least
+  (testing "wait-for throws ConditionTimeoutException if condition happens before given at-least parameter"
+    (let [start-time (System/currentTimeMillis)
+          end-time (+ start-time 100)]
+      (is (thrown-with-msg?
+            ConditionTimeoutException
+            #"milliseconds which is earlier than expected minimum timeout 500 milliseconds"
+            (wait-for
+              {:at-least [500 :milliseconds]}
               (fn [] (>= (System/currentTimeMillis) end-time))))))))
 
 (deftest wait-for-poll-intervals

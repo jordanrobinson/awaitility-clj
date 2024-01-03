@@ -23,6 +23,7 @@
   [^ConditionFactory factory [option-key option-data]]
   (case option-key
     :at-most (.atMost factory ^Duration (tuple->duration option-data))
+    :at-least (.atLeast factory ^Duration (tuple->duration option-data))
     :poll-interval (.pollInterval factory ^Duration (tuple->duration option-data))))
 
 (defn- apply-options
