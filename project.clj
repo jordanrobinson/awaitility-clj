@@ -2,9 +2,9 @@
   (or (System/getenv "VERSION")
       "0.0.0"))
 
-(defproject ai.mypulse/awaitility-clj version
+(defproject uk.co.jordanrobinson/awaitility-clj version
   :description "Clojure wrapper for the Awaitility Java library."
-  :url "https://github.com/mypulse-uk/awaitility-clj"
+  :url "https://github.com/jordanrobinson/awaitility-clj"
 
   :license {:name "The MIT License"
             :url "https://opensource.org/licenses/MIT"}

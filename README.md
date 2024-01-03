@@ -2,7 +2,7 @@
 
 Clojure wrapper for the [Awaitility](http://www.awaitility.org/) Java library.
 
-[![Clojars Project](https://img.shields.io/clojars/v/ai.mypulse/awaitility-clj.svg)](https://clojars.org/ai.mypulse/awaitility-clj)
+[![Clojars Project](https://img.shields.io/clojars/v/uk.co.jordanrobinson/awaitility-clj.svg)](https://clojars.org/uk.co.jordanrobinson/awaitility-clj)
 
 ## Examples
 
@@ -18,6 +18,6 @@ Clojure wrapper for the [Awaitility](http://www.awaitility.org/) Java library.
 
 ## License
 
-Copyright © 2023 MyPulse Ltd.
+Copyright © 2024 Jordan Robinson
 
 Distributed under the MIT license.
